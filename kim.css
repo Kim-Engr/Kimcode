@@ -7,7 +7,7 @@
 }
 
 body {
-  background-image: url("background\ dark.jpeg");
+  background-image: url("Assets/background.jpg");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -270,7 +270,7 @@ li{
 fieldset{
     text-align: center;
     margin: auto;
-    border-color: #fff;
+    border-color: #ff1a1a;
     width: 1050px;
     border-style: double;
     border-width: 5px;
