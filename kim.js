@@ -49,7 +49,7 @@ fileUploadForms.forEach(form => {
         // Check if a file is selected
         if (fileInput.files.length > 0) {
             const fileName = fileInput.files[0].name;
-            uploadStatus.textContent = File "${fileName}" uploaded successfully!; // Fixed string interpolation syntax
+            uploadStatus.textContent = `File "${fileName}" uploaded successfully!`; // Fixed string interpolation syntax
             uploadStatus.style.color = 'green';
 
             // Clear the file input after upload
