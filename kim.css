@@ -281,44 +281,170 @@ legend{
     font-size: 30px;
     text-align: left;
 }
-/* FILES SECTION */
-.files {
-    padding: 50px;
+
+/* SECTION 5 (FILES)*/
+/* Container for the file upload section */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
     text-align: center;
-}
-
-.file-category {
-    margin: 20px 0; /* Space between categories */
-    padding: 20px;
-    border: 1px solid #ccc; /* Border around each category */
+  }
+  
+  /* Heading styles */
+  h3 {
+    color: chocolate; /* Chocolate for heading */
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Folder name input styles */
+  #folder-name {
+    padding: 10px; /* Padding inside the input */
+    font-size: 16px; /* Font size for text */
+    border: 2px solid chocolate; /* Chocolate border for folder name input */
     border-radius: 5px; /* Rounded corners */
-}
-
-.file-category h3 {
-    margin-bottom: 10px;
-}
-
-.file-category input[type="file"] {
-    margin: 10px;
-}
-
-.file-category button {
-    padding: 10px 15px;
-    background-color: #fff;
+    margin-right: 10px; /* Space between input and button */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+  }
+  
+  /* Focus state for the folder name input */
+  #folder-name:focus {
+    outline: none; /* Remove default outline */
+    border-color: #d2691e; /* Darker chocolate on focus */
+  }
+  
+  /* Folder selection dropdown styles */
+  #folder-select {
+    padding: 10px; /* Padding inside the select box */
+    font-size: 16px; /* Font size for dropdown text */
+    border: 2px solid chocolate; /* Chocolate border for dropdown */
+    border-radius: 5px; /* Rounded corners */
+    background-color: khaki; /* Khaki background color */
+    color: black; /* Black text color for better visibility */
+  }
+  
+  /* Hover effect for dropdown */
+  #folder-select:hover {
+    background-color: #d2691e; /* Slightly darker khaki on hover for better visibility */
+  }
+  
+  /* Label style for Select Folder with chocolate color */
+  label[for="folder-select"] {
+    color: chocolate; /* Chocolate color for label text */
+     font-size: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* File upload form styles */
+  #upload-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Styles for the file input */
+  #file-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid chocolate; /* Chocolate border for file input */
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+    background-color: #e6f2ff; /* Light blue background for file input */
+  }
+  
+  /* Focus state for the file input */
+  #file-input:focus {
+    outline: none;
+    border-color: chocolate; /* Chocolate on focus */
+    background-color: #cce0ff; /* Lighter blue on focus */
+  }
+  
+  /* Button styles */
+  button {
+    padding: 10px 20px;
+    background-color: chocolate; /* Chocolate background for button */
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
-}
-
-.file-category button:hover {
-    background-color: #ff1a1a;
-}
-
-.upload-status {
-    margin-top: 10px;
     font-size: 16px;
-}
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  /* Icon in button */
+  button i {
+    margin-right: 5px; /* Space between icon and text */
+  }
+  
+  /* Hover effect for buttons */
+  button:hover {
+    background-color: #d2691e; /* Medium chocolate on hover */
+    transform: translateY(-2px);
+  }
+  
+  /* Loading indicator styles */
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: chocolate; /* Chocolate for loading indicator */
+    margin-bottom: 20px;
+  }
+  
+  /* Uploaded files display area with folder-like background */
+  #uploaded-files {
+   display:flex; 
+   flex-wrap:wrap; 
+   justify-content:center; 
+   padding:.02rem; 
+   background-color:#f8f9fa; 
+   border-radius:.02rem
+  }
+  
+  /* Individual file item styles */
+  .file-item {
+   width:.15rem; 
+   height:auto; 
+   margin:.01rem; 
+   display:flex; 
+   flex-direction:.01rem; 
+   align-items:center; 
+   justify-content:center; 
+   background-color:#f8f9fa; 
+   border-radius:.01rem
+  }
+  
+  /* Hover effect for file items */
+  .file-item:hover {
+   transform:.05s scale(1.05); 
+   background-color:#e6f2ff
+  }
+  
+  /* Image styles inside file items */
+  .file-item img {
+   max-width:.01rem
+  }
+  
+  /* Text styles inside file items */
+  .file-item p {
+   margin-top:.01rem
+  }
+  
+  /* Remove button styles inside file items */
+  .file-item .remove-btn {
+   position:absolute
+  }
+  
+  /* Show remove button on hover over file item */ 
+  .file-item:hover .remove-btn { 
+  display:block
+  }
+
 /* FOOTER */
 
 .footer {
