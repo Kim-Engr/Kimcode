@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> My Webpage </title>
-    <link rel="icon" href="background dark.jpeg" type="icon">
+    <link rel="icon" href="Assets/background dark.jpeg" type="icon">
     <link rel="stylesheet" href="kim.css">
 </head>
 <body>
@@ -110,62 +110,41 @@
         </form>
     </section>
       
-      
     <br><br>
    <!----------- SECTION 5 (FILES) ----------->
-    <section class='files' id='section-files'>
-        <h2>Upload Files</h2>
+   <div class="container"> 
+    <section class='files' id='section-file'> 
+        <h3>FILES</h3>
         
-        <!-- Category 1 -->
-        <div class="file-category">
-            <h3>Category 1</h3>
-            <form class="file-upload-form">
-                <input type="file" required>
-                <button type="submit">Upload</button>
-            </form>
-            <div class="upload-status"></div>
-        </div>
+            <!-- New Folder Creation -->
+            <div>
+                <input type="text" id="folder-name" placeholder="Enter folder name" />
+                <button id="create-folder-btn">Create Folder</button>
+            </div>
+            <br>
 
-        <!-- Category 2 -->
-        <div class="file-category">
-            <h3>Category 2</h3>
-            <form class="file-upload-form">
-                <input type="file" required>
-                <button type="submit">Upload</button>
-            </form>
-            <div class="upload-status"></div>
-        </div>
+            <!-- Folder Selection -->
+            <label for="folder-select">Select Folder:</label>
+            <select id="folder-select">
+                <option value="">Select a folder</option>
+            </select>
+            <br><br>
 
-        <!-- Category 3 -->
-        <div class="file-category">
-            <h3>Category 3</h3>
-            <form class="file-upload-form">
-                <input type="file" required>
-                <button type="submit">Upload</button>
+            <!-- File Upload Form -->
+            <form id="upload-form">
+                <input type="file" id="file-input" accept="/" required />
+                <button type="submit"><i class="fas fa-upload"></i> Upload</button>
             </form>
-            <div class="upload-status"></div>
-        </div>
 
-        <!-- Category 4 -->
-        <div class="file-category">
-            <h3>Category 4</h3>
-            <form class="file-upload-form">
-                <input type="file" required>
-                <button type="submit">Upload</button>
-            </form>
-            <div class="upload-status"></div>
-        </div>
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading" style="display: none">
+                Uploading...
+            </div>
 
-        <!-- Category 5 -->
-        <div class="file-category">
-            <h3>Category 5</h3>
-            <form class="file-upload-form">
-                <input type="file" required>
-                <button type="submit">Upload</button>
-            </form>
-            <div class="upload-status"></div>
-        </div>
-    </section>
+            <!-- Uploaded Files Display -->
+            <div id="uploaded-files"></div>
+        </section>
+    </div>
         <br><br>
     </main>
 
@@ -177,6 +156,6 @@
         </div>
     </footer>
 
-    <script src="kim.js"></script>
+    <script src="kim.js"></script>  
 </body>
 </html>
