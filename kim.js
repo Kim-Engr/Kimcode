@@ -35,28 +35,117 @@ logoutBtn.addEventListener('click', () => {
     loginForm.style.display = 'block'; // Show login form
 });
 
-// Select all file upload forms
-const fileUploadForms = document.querySelectorAll('.file-upload-form');
+// Get elements for file upload and folder management
+const form = document.getElementById("upload-form");
+const fileInput = document.getElementById("file-input");
+const uploadedFilesContainer = document.getElementById("uploaded-files");
+const loadingIndicator = document.getElementById("loading");
+const folderSelect = document.getElementById("folder-select");
+const createFolderBtn = document.getElementById("create-folder-btn");
+const folderNameInput = document.getElementById("folder-name");
 
-// Loop through each form and add an event listener
-fileUploadForms.forEach(form => {
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+// Object to hold created folders and their files
+let folders = {};
 
-        const fileInput = this.querySelector('input[type="file"]');
-        const uploadStatus = this.querySelector('.upload-status');
+// Handle folder creation
+createFolderBtn.addEventListener("click", () => {
+    const folderName = folderNameInput.value.trim();
+    
+    if (folderName && !folders[folderName]) {
+        folders[folderName] = []; // Initialize an array for files in this folder
+        
+        // Update dropdown
+        const option = document.createElement("option");
+        option.value = folderName;
+        option.textContent = folderName;
+        folderSelect.appendChild(option);
+        
+        // Clear input field
+        folderNameInput.value = '';
+    } else {
+        alert('Please enter a valid and unique folder name.');
+    }
+});
 
-        // Check if a file is selected
-        if (fileInput.files.length > 0) {
-            const fileName = fileInput.files[0].name;
-            uploadStatus.textContent = `File "${fileName}" uploaded successfully!`; // Fixed string interpolation syntax
-            uploadStatus.style.color = 'green';
+// Handle file upload
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const file = fileInput.files[0];
+    const selectedFolder = folderSelect.value; // Get selected folder
 
-            // Clear the file input after upload
-            fileInput.value = '';
-        } else {
-            uploadStatus.textContent = 'Please select a file to upload.';
-            uploadStatus.style.color = 'red';
-        }
-    });
+    if (!selectedFolder) {
+        alert('Please select a folder or create one before uploading.');
+        return;
+    }
+
+    if (!file) {
+        alert('Please select a file to upload.');
+        return;
+    }
+
+    loadingIndicator.style.display = "block"; // Show loading indicator
+
+    // Simulate an upload delay
+    setTimeout(() => {
+        const fileItem = { name: file.name, url: URL.createObjectURL(file) };
+        
+        // Store the uploaded file in the corresponding folder array
+        folders[selectedFolder].push(fileItem);
+
+        // Display files for the selected folder
+        displayFiles(selectedFolder);
+
+        loadingIndicator.style.display = "none"; // Hide loading indicator
+        fileInput.value = ""; // Clear file input
+    }, 1000); // Simulate a 1-second upload delay
+});
+
+// Function to display files for the selected folder
+function displayFiles(folder) {
+    uploadedFilesContainer.innerHTML = ''; // Clear previous files
+    
+    if (folders[folder].length > 0) {
+        folders[folder].forEach(file => {
+            const fileItem = document.createElement("div");
+            fileItem.classList.add("file-item");
+
+            const fileNameDisplay = document.createElement("p");
+            fileNameDisplay.textContent = file.name;
+
+            const previewLink = document.createElement("a");
+            previewLink.href = file.url;
+            previewLink.textContent = "View";
+            previewLink.target="_blank";  // Open in new tab
+
+            const removeBtnDisplay = document.createElement("button");
+            removeBtnDisplay.classList.add("remove-btn");
+            removeBtnDisplay.innerHTML = "&times;";
+            
+            removeBtnDisplay.onclick = () => {
+                uploadedFilesContainer.removeChild(fileItem);
+                folders[folder] = folders[folder].filter(f => f.name !== file.name);
+                displayFiles(folder); // Refresh displayed files for this folder
+                URL.revokeObjectURL(file.url); // Release the object URL
+            };
+
+            fileItem.appendChild(fileNameDisplay);
+            fileItem.appendChild(previewLink);
+            fileItem.appendChild(removeBtnDisplay);
+            uploadedFilesContainer.appendChild(fileItem);
+        });
+    } else {
+        uploadedFilesContainer.innerHTML = '<p>No files uploaded in this folder.</p>';
+    }
+}
+
+// Update displayed files when the selected folder changes
+folderSelect.addEventListener('change', (event) => {
+    const selectedFolder = event.target.value;
+    
+    if (selectedFolder) {
+        displayFiles(selectedFolder); // Display files for the newly selected folder
+    } else {
+        uploadedFilesContainer.innerHTML = '<p>Select a folder to view its files.</p>'; // Clear displayed files if no folder is selected
+    }
 });
